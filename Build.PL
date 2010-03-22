@@ -21,9 +21,11 @@ my $build = Module::Build->new(
 
 	# Module that are required for tests in t/
 	build_requires => {
-		'Test::Exception' => '0.03',
-		'Test::More'      => 0,
-		'Test::Requires'  => '0.02',
+		'Test::Exception'           => '0.03',
+		'Test::More'                => '0.94',
+		'Test::Override::UserAgent' => 0,
+		'Test::Requires'            => '0.02',
+		'URI::QueryParam'           => 0,
 	},
 
 	# Module that are required
@@ -43,7 +45,6 @@ my $build = Module::Build->new(
 		'MooseX::Types::URI'        => 0,
 		'Net::SAJAX'                => '0.102',
 		'Readonly'                  => '1.03',
-		'URI'                       => 0,
 		'namespace::clean'          => '0.04',
 	},
 

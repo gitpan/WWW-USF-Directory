@@ -4,8 +4,10 @@ author:
   - 'Douglas Christopher Wilson <doug@somethingdoug.com>'
 build_requires:
   Test::Exception: 0.03
-  Test::More: 0
+  Test::More: 0.94
+  Test::Override::UserAgent: 0
   Test::Requires: 0.02
+  URI::QueryParam: 0
 configure_requires:
   Module::Build: 0.36
 generated_by: 'Module::Build version 0.3601'
@@ -22,25 +24,25 @@ no_index:
 provides:
   WWW::USF::Directory:
     file: lib/WWW/USF/Directory.pm
-    version: 0.002_001
+    version: 0.002_002
   WWW::USF::Directory::Entry:
     file: lib/WWW/USF/Directory/Entry.pm
-    version: 0.002_001
+    version: 0.002_002
   WWW::USF::Directory::Entry::Affiliation:
     file: lib/WWW/USF/Directory/Entry/Affiliation.pm
-    version: 0.002_001
+    version: 0.002_002
   WWW::USF::Directory::Exception:
     file: lib/WWW/USF/Directory/Exception.pm
-    version: 0.002_001
+    version: 0.002_002
   WWW::USF::Directory::Exception::MethodArguments:
     file: lib/WWW/USF/Directory/Exception/MethodArguments.pm
-    version: 0.002_001
+    version: 0.002_002
   WWW::USF::Directory::Exception::TooManyResults:
     file: lib/WWW/USF/Directory/Exception/TooManyResults.pm
-    version: 0.002_001
+    version: 0.002_002
   WWW::USF::Directory::Exception::UnknownResponse:
     file: lib/WWW/USF/Directory/Exception/UnknownResponse.pm
-    version: 0.002_001
+    version: 0.002_002
 requires:
   Carp: 0
   Encode: 0
@@ -56,11 +58,10 @@ requires:
   MooseX::Types::URI: 0
   Net::SAJAX: 0.102
   Readonly: 1.03
-  URI: 0
   namespace::clean: 0.04
   perl: 5.008001
 resources:
   homepage: http://github.com/dougwilson/perl5-www-usf-directory/
   license: http://dev.perl.org/licenses/
   repository: git://github.com/dougwilson/perl5-www-usf-directory.git
-version: 0.002_001
+version: 0.002_002

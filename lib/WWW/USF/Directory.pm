@@ -7,7 +7,7 @@ use warnings 'all';
 ###########################################################################
 # METADATA
 our $AUTHORITY = 'cpan:DOUGDUDE';
-our $VERSION   = '0.002_002';
+our $VERSION   = '0.003';
 
 ###########################################################################
 # MOOSE
@@ -25,8 +25,7 @@ use MooseX::Types::URI qw(
 
 ###########################################################################
 # MODULE IMPORTS
-use Encode;
-use HTML::HTML5::Parser 0.03;
+use HTML::HTML5::Parser 0.101;
 use List::MoreUtils 0.07;
 use Net::SAJAX 0.102;
 use Readonly 1.03;
@@ -331,8 +330,8 @@ sub _clean_node_text {
 		$br->replaceNode($node->ownerDocument->createTextNode('{NEWLINE}'));
 	}
 
-	# Get the text of the node (make sure it is native UTF-8)
-	my $text = Encode::encode_utf8($node->textContent);
+	# Get the text of the node
+	my $text = $node->textContent;
 
 	# Transform all the horizontal space into ASCII spaces
 	$text =~ s{\s+}{ }gmsx;
@@ -515,6 +514,14 @@ sub _table_row_to_entry {
 		$row{campus_phone} =~ s{\A (\d{3}) (\d{3}) (\d{4}) \z}{+1 $1 $2 $3}msx;
 	}
 
+	if (exists $row{email}) {
+		# USF is not too bright at preventing unwanted text from coming through
+		if (List::MoreUtils::any { $_ eq $row{email} } qw[null undefined]) {
+			# This is an invalid address
+			delete $row{email};
+		}
+	}
+
 	# Make a new entry for the result
 	my $entry = WWW::USF::Directory::Entry->new(%row);
 
@@ -536,7 +543,7 @@ WWW::USF::Directory - Access to USF's online directory
 
 =head1 VERSION
 
-Version 0.002_002
+Version 0.003
 
 =head1 SYNOPSIS
 
@@ -717,9 +724,7 @@ the server that were not known when the module was written.
 
 =over 4
 
-=item * L<Encode>
-
-=item * L<HTML::HTML5::Parser> 0.03
+=item * L<HTML::HTML5::Parser> 0.101
 
 =item * L<List::MoreUtils> 0.07
 
@@ -743,7 +748,7 @@ Douglas Christopher Wilson, C<< <doug at somethingdoug.com> >>
 
 =head1 BUGS AND LIMITATIONS
 
-There are no indended limitations, and so if you find a feature in the USF
+There are no intended limitations, and so if you find a feature in the USF
 directory that is not implemented here, please let me know.
 
 Please report any bugs or feature requests to
